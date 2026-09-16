@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>С нуля до готового интернет-продукта за 14 дней</title>
 <meta name="description" content="Курс по вайбкодингу. За 14 дней собираем твой продукт — сервис, приложение или телеграм-бот — публикуем и приводим первых пользователей.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect width="32" height="32" rx="7" fill="%23171532"/><g fill="%23FF2E9A"><rect x="15" y="2" width="2" height="3"/><rect x="4" y="12" width="3" height="2"/><rect x="25" y="12" width="3" height="2"/><rect x="7" y="6" width="2" height="2"/><rect x="23" y="6" width="2" height="2"/></g><g fill="%23FF2E9A"><rect x="12" y="7" width="8" height="2"/><rect x="10" y="9" width="12" height="8"/><rect x="12" y="17" width="8" height="2"/></g><g fill="%236B4BFF"><rect x="12" y="21" width="8" height="2"/><rect x="12" y="24" width="8" height="2"/><rect x="14" y="27" width="4" height="2"/></g></svg>" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://yookassa.ru/integration/simplepay/css/yookassa_construct_form.css?v=1.35.0">
 <style>
 :root{
   --ink:#171532;
@@ -282,7 +285,15 @@ section{padding:88px 0}
 .price ul{list-style:none;padding:0;margin:20px 0 0}
 .price ul li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.95rem}
 .price-cta{text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-.price-cta .btn{width:100%;text-align:center}
+.pay-form{width:100%}
+.pay-form .ym-payment-btn-block{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0}
+.pay-form .ym-btn-pay{font-family:"Golos Text",system-ui,sans-serif!important;background:var(--pink)!important;
+  border:1px solid var(--pink)!important;color:#fff!important;border-radius:2px!important;
+  padding:17px 30px!important;font-size:1.02rem!important;font-weight:600!important;line-height:1.2!important;
+  height:auto!important;width:auto!important;box-shadow:none!important;cursor:pointer;transition:background .15s ease}
+.pay-form .ym-btn-pay:hover{background:var(--ink)!important;border-color:var(--ink)!important}
+.pay-form .ym-logo{opacity:.6;flex-shrink:0}
+.price-cta > .btn{width:100%;text-align:center}
 .final .btn-ghost{color:#fff;border-color:#4A4479}
 .final .btn-ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
 .price-cta .cta-note{margin-top:14px;max-width:34ch}
@@ -684,8 +695,16 @@ footer a{color:var(--ink-soft)}
         </ul>
       </div>
       <div class="price-cta">
-        <!-- ЮKassa: замени href на ссылку платёжной формы или вставь сюда код кнопки из кабинета -->
-        <a class="btn btn-lg btn-pink" id="pay" href="#">Оплатить сразу</a>
+        <form class="yoomoney-payment-form pay-form" id="pay" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">
+          <input name="customerNumber" type="hidden" value="С нуля до готового интернет-продукта за 14 дней">
+          <div class="ym-payment-btn-block">
+            <div class="ym-input-icon-rub ym-display-none">
+              <input name="sum" placeholder="0.00" class="ym-input ym-sum-input ym-required-input" type="number" step="any" value="4990">
+            </div>
+            <button data-text="Оплатить" class="ym-btn-pay ym-result-price"><span class="ym-text-crop">Оплатить</span> <span class="ym-price-output"> 4&nbsp;990,00&nbsp;₽</span></button><img src="https://yookassa.ru/integration/simplepay/img/iokassa-gray.svg?v=1.35.0" class="ym-logo" width="114" height="27" alt="ЮKassa">
+          </div>
+          <input name="shopId" type="hidden" value="1465612">
+        </form>
         <a class="btn btn-lg btn-ghost" href="https://t.me/apolevoyy">Написать в Telegram</a>
         <p class="cta-note">Если остались вопросы — напиши, задам пару вопросов про твою идею и честно скажу, стоит ли идти.</p>
       </div>
@@ -710,8 +729,7 @@ footer a{color:var(--ink-soft)}
     <h2>Через две недели у тебя будет ссылка на свой продукт</h2>
     <p>Или деньги обратно. Третьего варианта в этом курсе не предусмотрено.</p>
     <div class="cta-row">
-      <!-- ЮKassa: та же ссылка, что и в блоке с ценой -->
-      <a class="btn btn-lg btn-pink" href="#">Оплатить сразу</a>
+      <a class="btn btn-lg btn-pink" href="#pay">Оплатить сразу</a>
       <a class="btn btn-lg btn-ghost" href="https://t.me/apolevoyy">Написать в Telegram</a>
       <span class="cta-note">Старт — 28 сентября</span>
     </div>
@@ -720,11 +738,12 @@ footer a{color:var(--ink-soft)}
 
 <footer>
   <div class="wrap foot">
-    <div>ИП Власов Андрей Викторович, Москва<br>ИНН · ОГРНИП — указать</div>
+    <div>ИП Власов Андрей Викторович<br>ИНН 694903324705 · ОГРНИП 326690000019882</div>
     <div><a href="mailto:fixakk@yandex.ru">fixakk@yandex.ru</a> · <a href="https://t.me/apolevoyy">Telegram</a></div>
-    <div><a href="#">Оферта</a> · <a href="#">Политика конфиденциальности</a></div>
+    <div><a href="oferta.html">Оферта</a> · <a href="politika.html">Политика конфиденциальности</a></div>
   </div>
 </footer>
 
+<script src="https://yookassa.ru/integration/simplepay/js/yookassa_construct_form.js?v=1.35.0"></script>
 </body>
 </html>
