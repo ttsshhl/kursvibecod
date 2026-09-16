@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://yookassa.ru/integration/simplepay/css/yookassa_construct_form.css?v=1.35.0">
 <style>
 :root{
   --ink:#171532;
@@ -285,14 +284,10 @@ section{padding:88px 0}
 .price ul{list-style:none;padding:0;margin:20px 0 0}
 .price ul li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.95rem}
 .price-cta{text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-.pay-form{width:100%}
-.pay-form .ym-payment-btn-block{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0}
-.pay-form .ym-btn-pay{font-family:"Golos Text",system-ui,sans-serif!important;background:var(--pink)!important;
-  border:1px solid var(--pink)!important;color:#fff!important;border-radius:2px!important;
-  padding:17px 30px!important;font-size:1.02rem!important;font-weight:600!important;line-height:1.2!important;
-  height:auto!important;width:auto!important;box-shadow:none!important;cursor:pointer;transition:background .15s ease}
-.pay-form .ym-btn-pay:hover{background:var(--ink)!important;border-color:var(--ink)!important}
-.pay-form .ym-logo{opacity:.6;flex-shrink:0}
+.pay-form{margin:0}
+.price-cta .pay-form{width:100%}
+button.btn{font-family:inherit;cursor:pointer;line-height:1.2}
+.price-cta .pay-form .btn{width:100%}
 .price-cta > .btn{width:100%;text-align:center}
 .final .btn-ghost{color:#fff;border-color:#4A4479}
 .final .btn-ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
@@ -695,15 +690,11 @@ footer a{color:var(--ink-soft)}
         </ul>
       </div>
       <div class="price-cta">
-        <form class="yoomoney-payment-form pay-form" id="pay" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">
-          <input name="customerNumber" type="hidden" value="С нуля до готового интернет-продукта за 14 дней">
-          <div class="ym-payment-btn-block">
-            <div class="ym-input-icon-rub ym-display-none">
-              <input name="sum" placeholder="0.00" class="ym-input ym-sum-input ym-required-input" type="number" step="any" value="4990">
-            </div>
-            <button data-text="Оплатить" class="ym-btn-pay ym-result-price"><span class="ym-text-crop">Оплатить</span> <span class="ym-price-output"> 4&nbsp;990,00&nbsp;₽</span></button><img src="https://yookassa.ru/integration/simplepay/img/iokassa-gray.svg?v=1.35.0" class="ym-logo" width="114" height="27" alt="ЮKassa">
-          </div>
-          <input name="shopId" type="hidden" value="1465612">
+        <form class="pay-form" id="pay" action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">
+          <input type="hidden" name="shopId" value="1465612">
+          <input type="hidden" name="sum" value="4990">
+          <input type="hidden" name="customerNumber" value="С нуля до готового интернет-продукта за 14 дней">
+          <button type="submit" class="btn btn-lg btn-pink">Оплатить сразу — 4 990 ₽</button>
         </form>
         <a class="btn btn-lg btn-ghost" href="https://t.me/apolevoyy">Написать в Telegram</a>
         <p class="cta-note">Если остались вопросы — напиши, задам пару вопросов про твою идею и честно скажу, стоит ли идти.</p>
@@ -729,7 +720,12 @@ footer a{color:var(--ink-soft)}
     <h2>Через две недели у тебя будет ссылка на свой продукт</h2>
     <p>Или деньги обратно. Третьего варианта в этом курсе не предусмотрено.</p>
     <div class="cta-row">
-      <a class="btn btn-lg btn-pink" href="#pay">Оплатить сразу</a>
+      <form class="pay-form"  action="https://yookassa.ru/integration/simplepay/payment" method="post" accept-charset="utf-8">
+        <input type="hidden" name="shopId" value="1465612">
+        <input type="hidden" name="sum" value="4990">
+        <input type="hidden" name="customerNumber" value="С нуля до готового интернет-продукта за 14 дней">
+        <button type="submit" class="btn btn-lg btn-pink">Оплатить сразу — 4 990 ₽</button>
+      </form>
       <a class="btn btn-lg btn-ghost" href="https://t.me/apolevoyy">Написать в Telegram</a>
       <span class="cta-note">Старт — 28 сентября</span>
     </div>
@@ -744,6 +740,5 @@ footer a{color:var(--ink-soft)}
   </div>
 </footer>
 
-<script src="https://yookassa.ru/integration/simplepay/js/yookassa_construct_form.js?v=1.35.0"></script>
 </body>
 </html>
